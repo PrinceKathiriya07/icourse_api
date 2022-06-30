@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const SECRET = process.env.JWT_SECRET;
 
 const { check, validationResult } = require("express-validator");
 
@@ -65,7 +66,7 @@ exports.login = (req, res, next) => {
           email: loadedUser.email,
           userId: loadedUser._id.toString(),
         },
-        "somesupersecretsecret",
+        SECRET,
         {
           expiresIn: "24h",
         }

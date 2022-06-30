@@ -8,6 +8,7 @@ PORT = process.env.PORT || 3001;
 
 const authRoutes = require("./routes/auth");
 const courseRoutes = require("./routes/course");
+const URL = process.env.MONGO_CONNECTION_URL;
 
 const app = express();
 // app.use(express.urlencoded({ extended: true }));
@@ -56,9 +57,7 @@ app.use((req, res, next) => {
 
 // connection server and db
 mongoose
-  .connect(
-    "mongodb+srv://admin:BkqcNMYyoC9v27IS@cluster0.t8miz.mongodb.net/icourse"
-  )
+  .connect(URL)
   .then((result) => {
     app.listen(PORT);
     console.log(`Listening on port ${PORT}`);
